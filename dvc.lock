@@ -9,11 +9,11 @@ stages:
       size: 573
     params:
       params.yaml:
-        Data_collection.test_size: 0.5
+        Data_collection.test_size: 0.2
     outs:
     - path: data/raw
       hash: md5
-      md5: a9de0e7df99b9fa655325a0611ecb59a.dir
+      md5: c0c2d65c14a603e91e029fda3c344a5c.dir
       size: 522262
       nfiles: 2
   pre_processing:
@@ -21,7 +21,7 @@ stages:
     deps:
     - path: data/raw
       hash: md5
-      md5: a9de0e7df99b9fa655325a0611ecb59a.dir
+      md5: c0c2d65c14a603e91e029fda3c344a5c.dir
       size: 522262
       nfiles: 2
     - path: src/data/data_processing.py
@@ -30,20 +30,20 @@ stages:
       size: 767
     params:
       params.yaml:
-        model_training.n_estimators: 1000
+        model_training.n_estimators: 100
     outs:
     - path: data/processed
       hash: md5
-      md5: c0044a35456309e806eb0a7025400d2e.dir
-      size: 546180
+      md5: 09d7d1468d5c1e6739769af7e3154438.dir
+      size: 546137
       nfiles: 2
   model_training:
     cmd: python src/model/model_training.py
     deps:
     - path: data/processed
       hash: md5
-      md5: c0044a35456309e806eb0a7025400d2e.dir
-      size: 546180
+      md5: 09d7d1468d5c1e6739769af7e3154438.dir
+      size: 546137
       nfiles: 2
     - path: src/model/model_training.py
       hash: md5
@@ -52,15 +52,15 @@ stages:
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: afa8a0dcddcefc2c1f0f18a8a84b038f
-      size: 47524848
+      md5: 0860af02e6bf4665849e8910ba563063
+      size: 7339027
   model_testing:
     cmd: python src/model/model_testing.py
     deps:
     - path: models/model.pkl
       hash: md5
-      md5: afa8a0dcddcefc2c1f0f18a8a84b038f
-      size: 47524848
+      md5: 0860af02e6bf4665849e8910ba563063
+      size: 7339027
     - path: src/model/model_testing.py
       hash: md5
       md5: dde1d177f9ea0d92607db39f4b3e3c21
@@ -68,5 +68,5 @@ stages:
     outs:
     - path: reports/metrics.json
       hash: md5
-      md5: 2a61247c2ec32e320ad5f86870c42031
+      md5: 80c77de9a9477899c0f4a9ca3ff975c9
       size: 134

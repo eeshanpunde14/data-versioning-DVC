@@ -1,5 +1,5 @@
 Data_collection:
-    test_size: 0.50
+    test_size: 0.20
 
 model_training:
-    n_estimators: 1000
+    n_estimators: 100
